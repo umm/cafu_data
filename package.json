@@ -1,0 +1,31 @@
+{
+  "name": "@umm/cafu_data",
+  "version": "1.0.0",
+  "description": "General data layer libraries for CAFU",
+  "homepage": "https://github.com/umm/cafu_data",
+  "bugs": {
+    "url": "https://github.com/umm/cafu_data/issues"
+  },
+  "scripts": {
+    "umm:init": "umm-init",
+    "umm:generate_assembly_definition": "umm-generate_assembly_definition",
+    "umm:module:install": "umm-module-install",
+    "umm:module:uninstall": "umm-module-uninstall",
+    "postinstall": "npm run --silent umm:module:install",
+    "postuninstall": "npm run --silent umm:module:uninstall"
+  },
+  "author": "Tetsuya Mori",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:umm/cafu_data"
+  },
+  "files": [
+    "Assets"
+  ],
+  "dependencies": {
+    "@umm/scripts": "umm/scripts#^1.0.0",
+    "@umm/cafu_core": "umm/cafu_core#^3.0.0"
+  },
+  "devDependencies": {}
+}
