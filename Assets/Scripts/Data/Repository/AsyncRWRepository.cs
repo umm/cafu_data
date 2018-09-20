@@ -10,6 +10,7 @@ namespace CAFU.Data.Data.Repository
     {
         [Inject] private IAsyncReader Reader { get; }
         [Inject] private IAsyncWriter Writer { get; }
+        [Inject] private IChecker Checker { get; }
 
         public async Task<IEnumerable<byte>> ReadAsync(Uri uri)
         {
@@ -19,6 +20,11 @@ namespace CAFU.Data.Data.Repository
         public async Task WriteAsync(Uri uri, IEnumerable<byte> data)
         {
             await Writer.WriteAsync(uri, data);
+        }
+
+        public bool Exists(Uri uri)
+        {
+            return Checker.Exists(uri);
         }
     }
 }

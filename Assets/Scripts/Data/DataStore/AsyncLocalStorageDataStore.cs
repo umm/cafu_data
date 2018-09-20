@@ -12,11 +12,12 @@ namespace CAFU.Data.Data.DataStore
         IAsyncReader,
         IAsyncUpdater,
         IAsyncDeleter,
-        IAsyncWriter
+        IAsyncWriter,
+        IChecker
     {
         public async Task CreateAsync(Uri uri, IEnumerable<byte> data)
         {
-            if (File.Exists(GetUnescapedAbsolutePath(uri)))
+            if (Exists(uri))
             {
                 throw new InvalidOperationException($"File `{GetUnescapedAbsolutePath(uri)}' has already exists. Please consider to use IWritableDataStore.");
             }
@@ -32,7 +33,7 @@ namespace CAFU.Data.Data.DataStore
 
         public async Task<IEnumerable<byte>> ReadAsync(Uri uri)
         {
-            if (!File.Exists(GetUnescapedAbsolutePath(uri)))
+            if (!Exists(uri))
             {
                 throw new FileNotFoundException($"File `{GetUnescapedAbsolutePath(uri)}' does not found.");
             }
@@ -47,7 +48,7 @@ namespace CAFU.Data.Data.DataStore
 
         public async Task UpdateAsync(Uri uri, IEnumerable<byte> data)
         {
-            if (!File.Exists(GetUnescapedAbsolutePath(uri)))
+            if (!Exists(uri))
             {
                 throw new FileNotFoundException($"File `{GetUnescapedAbsolutePath(uri)}' does not found.");
             }
@@ -61,7 +62,7 @@ namespace CAFU.Data.Data.DataStore
 
         public async Task DeleteAsync(Uri uri)
         {
-            if (!File.Exists(GetUnescapedAbsolutePath(uri)))
+            if (!Exists(uri))
             {
                 throw new FileNotFoundException($"File `{GetUnescapedAbsolutePath(uri)}' does not found.");
             }
@@ -94,6 +95,11 @@ namespace CAFU.Data.Data.DataStore
         private static string GetUnescapedAbsolutePath(Uri uri)
         {
             return Uri.UnescapeDataString(uri.AbsolutePath);
+        }
+
+        public bool Exists(Uri uri)
+        {
+            return File.Exists(GetUnescapedAbsolutePath(uri));
         }
     }
 }

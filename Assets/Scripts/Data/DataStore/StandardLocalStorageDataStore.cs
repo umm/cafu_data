@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using CAFU.Data.Data.Repository;
 
 namespace CAFU.Data.Data.DataStore
 {
-    public class StandardLocalStorageDataStore :
+    /// <remarks>Can call ***Async methods, but compromise because we assume access via interface</remarks>
+    public class StandardLocalStorageDataStore : AsyncLocalStorageDataStore,
         IStandardCreator,
         IStandardReader,
         IStandardUpdater,
@@ -15,64 +14,27 @@ namespace CAFU.Data.Data.DataStore
     {
         public void Create(Uri uri, IEnumerable<byte> data)
         {
-            if (File.Exists(GetUnescapedAbsolutePath(uri)))
-            {
-                throw new InvalidOperationException($"File `{GetUnescapedAbsolutePath(uri)}' has already exists. Please consider to use IWritableDataStore.");
-            }
-
-            CreateDirectoryIfNeeded(uri);
-
-            File.WriteAllBytes(GetUnescapedAbsolutePath(uri), data.ToArray());
+            CreateAsync(uri, data).Wait();
         }
 
         public IEnumerable<byte> Read(Uri uri)
         {
-            if (!File.Exists(GetUnescapedAbsolutePath(uri)))
-            {
-                throw new FileNotFoundException($"File `{GetUnescapedAbsolutePath(uri)}' does not found.");
-            }
-
-            return File.ReadAllBytes(GetUnescapedAbsolutePath(uri));
+            return ReadAsync(uri).Result;
         }
 
         public void Update(Uri uri, IEnumerable<byte> data)
         {
-            if (!File.Exists(GetUnescapedAbsolutePath(uri)))
-            {
-                throw new FileNotFoundException($"File `{GetUnescapedAbsolutePath(uri)}' does not found.");
-            }
-
-            File.WriteAllBytes(GetUnescapedAbsolutePath(uri), data.ToArray());
+            UpdateAsync(uri, data).Wait();
         }
 
         public void Delete(Uri uri)
         {
-            if (!File.Exists(GetUnescapedAbsolutePath(uri)))
-            {
-                throw new FileNotFoundException($"File `{GetUnescapedAbsolutePath(uri)}' does not found.");
-            }
-
-            File.Delete(GetUnescapedAbsolutePath(uri));
+            DeleteAsync(uri).Wait();
         }
 
         public void Write(Uri uri, IEnumerable<byte> data)
         {
-            CreateDirectoryIfNeeded(uri);
-            File.WriteAllBytes(GetUnescapedAbsolutePath(uri), data.ToArray());
-        }
-
-        private static void CreateDirectoryIfNeeded(Uri uri)
-        {
-            if (!Directory.Exists(Path.GetDirectoryName(GetUnescapedAbsolutePath(uri))))
-            {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                Directory.CreateDirectory(Path.GetDirectoryName(GetUnescapedAbsolutePath(uri)));
-            }
-        }
-
-        private static string GetUnescapedAbsolutePath(Uri uri)
-        {
-            return Uri.UnescapeDataString(uri.AbsolutePath);
+            WriteAsync(uri, data).Wait();
         }
     }
 }

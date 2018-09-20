@@ -9,6 +9,7 @@ namespace CAFU.Data.Data.Repository
     {
         [Inject] private IStandardReader Reader { get; }
         [Inject] private IStandardWriter Writer { get; }
+        [Inject] private IChecker Checker { get; }
 
         public IEnumerable<byte> Read(Uri uri)
         {
@@ -18,6 +19,11 @@ namespace CAFU.Data.Data.Repository
         public void Write(Uri uri, IEnumerable<byte> data)
         {
             Writer.Write(uri, data);
+        }
+
+        public bool Exists(Uri uri)
+        {
+            return Checker.Exists(uri);
         }
     }
 }

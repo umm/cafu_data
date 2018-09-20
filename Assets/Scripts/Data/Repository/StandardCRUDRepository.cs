@@ -11,6 +11,7 @@ namespace CAFU.Data.Data.Repository
         [Inject] private IStandardReader Reader { get; }
         [Inject] private IStandardUpdater Updater { get; }
         [Inject] private IStandardDeleter Deleter { get; }
+        [Inject] private IChecker Checker { get; }
 
         public void Create(Uri uri, IEnumerable<byte> data)
         {
@@ -30,6 +31,11 @@ namespace CAFU.Data.Data.Repository
         public void Delete(Uri uri)
         {
             Deleter.Delete(uri);
+        }
+
+        public bool Exists(Uri uri)
+        {
+            return Checker.Exists(uri);
         }
     }
 }
