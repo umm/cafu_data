@@ -12,6 +12,7 @@ namespace CAFU.Data.Data.Repository
         [Inject] private IObservableReader Reader { get; }
         [Inject] private IObservableUpdater Updater { get; }
         [Inject] private IObservableDeleter Deleter { get; }
+        [Inject] private IChecker Checker { get; }
 
         public IObservable<Unit> CreateAsObservable(Uri uri, IEnumerable<byte> data)
         {
@@ -31,6 +32,11 @@ namespace CAFU.Data.Data.Repository
         public IObservable<Unit> DeleteAsObservable(Uri uri)
         {
             return Deleter.DeleteAsObservable(uri);
+        }
+
+        public bool Exists(Uri uri)
+        {
+            return Checker.Exists(uri);
         }
     }
 }

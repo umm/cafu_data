@@ -12,6 +12,7 @@ namespace CAFU.Data.Data.Repository
         [Inject] private IAsyncReader Reader { get; }
         [Inject] private IAsyncUpdater Updater { get; }
         [Inject] private IAsyncDeleter Deleter { get; }
+        [Inject] private IChecker Checker { get; }
 
         public async Task CreateAsync(Uri uri, IEnumerable<byte> data)
         {
@@ -31,6 +32,11 @@ namespace CAFU.Data.Data.Repository
         public async Task DeleteAsync(Uri uri)
         {
             await Deleter.DeleteAsync(uri);
+        }
+
+        public bool Exists(Uri uri)
+        {
+            return Checker.Exists(uri);
         }
     }
 }

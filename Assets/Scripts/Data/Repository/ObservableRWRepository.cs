@@ -10,6 +10,7 @@ namespace CAFU.Data.Data.Repository
     {
         [Inject] private IObservableReader Reader { get; }
         [Inject] private IObservableWriter Writer { get; }
+        [Inject] private IChecker Checker { get; }
 
         public IObservable<IEnumerable<byte>> ReadAsObservable(Uri uri)
         {
@@ -19,6 +20,11 @@ namespace CAFU.Data.Data.Repository
         public IObservable<Unit> WriteAsObservable(Uri uri, IEnumerable<byte> data)
         {
             return Writer.WriteAsObservable(uri, data);
+        }
+
+        public bool Exists(Uri uri)
+        {
+            return Checker.Exists(uri);
         }
     }
 }
