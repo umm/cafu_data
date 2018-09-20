@@ -14,6 +14,7 @@ namespace CAFU.Data.Data.UseCase
         IEnumerable<byte> Read(Uri uri);
         void Update(Uri uri, IEnumerable<byte> data);
         void Delete(Uri uri);
+        bool Exists(Uri uri);
     }
 
     [PublicAPI]
@@ -23,6 +24,7 @@ namespace CAFU.Data.Data.UseCase
         IObservable<IEnumerable<byte>> ReadAsObservable(Uri uri);
         IObservable<Unit> UpdateAsObservable(Uri uri, IEnumerable<byte> data);
         IObservable<Unit> DeleteAsObservable(Uri uri);
+        bool Exists(Uri uri);
     }
 
     [PublicAPI]
@@ -32,5 +34,6 @@ namespace CAFU.Data.Data.UseCase
         Task<IEnumerable<byte>> ReadAsync(Uri uri);
         Task UpdateAsync(Uri uri, IEnumerable<byte> data);
         Task DeleteAsync(Uri uri);
+        bool Exists(Uri uri);
     }
 }
