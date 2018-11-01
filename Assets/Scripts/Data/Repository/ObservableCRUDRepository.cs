@@ -8,11 +8,11 @@ namespace CAFU.Data.Data.Repository
 {
     public class ObservableCRUDRepository : IObservableCRUDHandler
     {
-        [Inject] private IObservableCreator Creator { get; }
-        [Inject] private IObservableReader Reader { get; }
-        [Inject] private IObservableUpdater Updater { get; }
-        [Inject] private IObservableDeleter Deleter { get; }
-        [Inject] private IChecker Checker { get; }
+        [Inject] private IObservableCreator Creator { get; set; }
+        [Inject] private IObservableReader Reader { get; set; }
+        [Inject] private IObservableUpdater Updater { get; set; }
+        [Inject] private IObservableDeleter Deleter { get; set; }
+        [Inject] private IChecker Checker { get; set; }
 
         public IObservable<Unit> CreateAsObservable(Uri uri, IEnumerable<byte> data)
         {

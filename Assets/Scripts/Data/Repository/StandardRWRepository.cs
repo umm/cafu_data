@@ -7,9 +7,9 @@ namespace CAFU.Data.Data.Repository
 {
     public class StandardRWRepository : IStandardRWHandler
     {
-        [Inject] private IStandardReader Reader { get; }
-        [Inject] private IStandardWriter Writer { get; }
-        [Inject] private IChecker Checker { get; }
+        [Inject] private IStandardReader Reader { get; set; }
+        [Inject] private IStandardWriter Writer { get; set; }
+        [Inject] private IChecker Checker { get; set; }
 
         public IEnumerable<byte> Read(Uri uri)
         {
