@@ -8,9 +8,9 @@ namespace CAFU.Data.Data.Repository
 {
     public class AsyncRWRepository : IAsyncRWHandler
     {
-        [Inject] private IAsyncReader Reader { get; }
-        [Inject] private IAsyncWriter Writer { get; }
-        [Inject] private IChecker Checker { get; }
+        [Inject] private IAsyncReader Reader { get; set; }
+        [Inject] private IAsyncWriter Writer { get; set; }
+        [Inject] private IChecker Checker { get; set; }
 
         public async Task<IEnumerable<byte>> ReadAsync(Uri uri)
         {

@@ -8,11 +8,11 @@ namespace CAFU.Data.Data.Repository
 {
     public class AsyncCRUDRepository : IAsyncCRUDHandler
     {
-        [Inject] private IAsyncCreator Creator { get; }
-        [Inject] private IAsyncReader Reader { get; }
-        [Inject] private IAsyncUpdater Updater { get; }
-        [Inject] private IAsyncDeleter Deleter { get; }
-        [Inject] private IChecker Checker { get; }
+        [Inject] private IAsyncCreator Creator { get; set; }
+        [Inject] private IAsyncReader Reader { get; set; }
+        [Inject] private IAsyncUpdater Updater { get; set; }
+        [Inject] private IAsyncDeleter Deleter { get; set; }
+        [Inject] private IChecker Checker { get; set; }
 
         public async Task CreateAsync(Uri uri, IEnumerable<byte> data)
         {

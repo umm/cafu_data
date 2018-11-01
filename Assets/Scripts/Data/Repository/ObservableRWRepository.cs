@@ -8,9 +8,9 @@ namespace CAFU.Data.Data.Repository
 {
     public class ObservableRWRepository : IObservableRWHandler
     {
-        [Inject] private IObservableReader Reader { get; }
-        [Inject] private IObservableWriter Writer { get; }
-        [Inject] private IChecker Checker { get; }
+        [Inject] private IObservableReader Reader { get; set; }
+        [Inject] private IObservableWriter Writer { get; set; }
+        [Inject] private IChecker Checker { get; set; }
 
         public IObservable<IEnumerable<byte>> ReadAsObservable(Uri uri)
         {

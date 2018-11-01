@@ -7,11 +7,11 @@ namespace CAFU.Data.Data.Repository
 {
     public class StandardCRUDRepository : IStandardCRUDHandler
     {
-        [Inject] private IStandardCreator Creator { get; }
-        [Inject] private IStandardReader Reader { get; }
-        [Inject] private IStandardUpdater Updater { get; }
-        [Inject] private IStandardDeleter Deleter { get; }
-        [Inject] private IChecker Checker { get; }
+        [Inject] private IStandardCreator Creator { get; set; }
+        [Inject] private IStandardReader Reader { get; set; }
+        [Inject] private IStandardUpdater Updater { get; set; }
+        [Inject] private IStandardDeleter Deleter { get; set; }
+        [Inject] private IChecker Checker { get; set; }
 
         public void Create(Uri uri, IEnumerable<byte> data)
         {
