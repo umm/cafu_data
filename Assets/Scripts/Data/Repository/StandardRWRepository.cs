@@ -9,6 +9,7 @@ namespace CAFU.Data.Data.Repository
     {
         [Inject] private IStandardReader Reader { get; set; }
         [Inject] private IStandardWriter Writer { get; set; }
+        [Inject] private IStandardDeleter Deleter { get; set; }
         [Inject] private IChecker Checker { get; set; }
 
         public IEnumerable<byte> Read(Uri uri)
@@ -19,6 +20,11 @@ namespace CAFU.Data.Data.Repository
         public void Write(Uri uri, IEnumerable<byte> data)
         {
             Writer.Write(uri, data);
+        }
+
+        public void Delete(Uri uri)
+        {
+            Deleter.Delete(uri);
         }
 
         public bool Exists(Uri uri)
