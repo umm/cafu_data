@@ -24,8 +24,9 @@
     "Assets"
   ],
   "dependencies": {
+    "@umm/cafu_core": "umm/cafu_core#^3.0.0",
     "@umm/scripts": "umm/scripts#^1.0.0",
-    "@umm/cafu_core": "umm/cafu_core#^3.0.0"
+    "@umm/unirx": "umm/unirx#^3.0.0"
   },
   "devDependencies": {}
 }
