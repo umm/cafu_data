@@ -3,10 +3,15 @@
     "references": [
         "umm@cafu_core@v3",
         "umm@unirx",
+        "umm@unirx-Async",
         "Zenject"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }
