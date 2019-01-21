@@ -32,8 +32,10 @@ namespace CAFU.Data.Utility
                     return texture2D.EncodeToJPG();
                 case EncodeFormat.EXR:
                     return texture2D.EncodeToEXR();
+#if UNITY_2018_3_OR_NEWER
                 case EncodeFormat.TGA:
                     return texture2D.EncodeToTGA();
+#endif
                 default:
                     throw new ArgumentOutOfRangeException(nameof(encodeFormat), encodeFormat, null);
             }
