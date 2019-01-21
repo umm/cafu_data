@@ -6,12 +6,7 @@ using UniRx;
 namespace CAFU.Data.Data.DataStore
 {
     /// <remarks>Can call ***Async methods, but compromise because we assume access via interface</remarks>
-    public class ObservableLocalStorageDataStore : AsyncLocalStorageDataStore,
-        IObservableCreator,
-        IObservableReader,
-        IObservableUpdater,
-        IObservableDeleter,
-        IObservableWriter
+    public class ObservableLocalStorageDataStore : AsyncLocalStorageDataStore, IObservableDataHandler
     {
         public IObservable<Unit> CreateAsObservable(Uri uri, IEnumerable<byte> data)
         {

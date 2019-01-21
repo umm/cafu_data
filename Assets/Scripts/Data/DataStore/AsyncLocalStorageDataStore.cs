@@ -4,18 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CAFU.Data.Data.Repository;
+using UniRx.Async;
 
 namespace CAFU.Data.Data.DataStore
 {
-    public class AsyncLocalStorageDataStore :
-        IAsyncCreator,
-        IAsyncReader,
-        IAsyncUpdater,
-        IAsyncDeleter,
-        IAsyncWriter,
-        IChecker
+    public class AsyncLocalStorageDataStore : IAsyncDataHandler
     {
-        public async Task CreateAsync(Uri uri, IEnumerable<byte> data)
+        public async UniTask CreateAsync(Uri uri, IEnumerable<byte> data)
         {
             if (Exists(uri))
             {
@@ -31,7 +26,7 @@ namespace CAFU.Data.Data.DataStore
             }
         }
 
-        public async Task<IEnumerable<byte>> ReadAsync(Uri uri)
+        public async UniTask<IEnumerable<byte>> ReadAsync(Uri uri)
         {
             if (!Exists(uri))
             {
@@ -46,7 +41,7 @@ namespace CAFU.Data.Data.DataStore
             }
         }
 
-        public async Task UpdateAsync(Uri uri, IEnumerable<byte> data)
+        public async UniTask UpdateAsync(Uri uri, IEnumerable<byte> data)
         {
             if (!Exists(uri))
             {
@@ -60,7 +55,7 @@ namespace CAFU.Data.Data.DataStore
             }
         }
 
-        public async Task DeleteAsync(Uri uri)
+        public async UniTask DeleteAsync(Uri uri)
         {
             if (!Exists(uri))
             {
@@ -73,7 +68,7 @@ namespace CAFU.Data.Data.DataStore
                 );
         }
 
-        public async Task WriteAsync(Uri uri, IEnumerable<byte> data)
+        public async UniTask WriteAsync(Uri uri, IEnumerable<byte> data)
         {
             CreateDirectoryIfNeeded(uri);
             using (var stream = new FileStream(GetUnescapedAbsolutePath(uri), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
