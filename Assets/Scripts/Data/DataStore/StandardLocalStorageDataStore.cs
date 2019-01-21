@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CAFU.Data.Data.Repository;
+using UniRx.Async;
 
 namespace CAFU.Data.Data.DataStore
 {
@@ -14,7 +15,7 @@ namespace CAFU.Data.Data.DataStore
     {
         public void Create(Uri uri, IEnumerable<byte> data)
         {
-            CreateAsync(uri, data).Wait();
+            CreateAsync(uri, data).Forget();
         }
 
         public IEnumerable<byte> Read(Uri uri)
@@ -24,17 +25,17 @@ namespace CAFU.Data.Data.DataStore
 
         public void Update(Uri uri, IEnumerable<byte> data)
         {
-            UpdateAsync(uri, data).Wait();
+            UpdateAsync(uri, data).Forget();
         }
 
         public void Delete(Uri uri)
         {
-            DeleteAsync(uri).Wait();
+            DeleteAsync(uri).Forget();
         }
 
         public void Write(Uri uri, IEnumerable<byte> data)
         {
-            WriteAsync(uri, data).Wait();
+            WriteAsync(uri, data).Forget();
         }
     }
 }

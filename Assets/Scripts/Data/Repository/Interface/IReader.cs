@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CAFU.Core;
+using UniRx.Async;
 
 namespace CAFU.Data.Data.Repository
 {
@@ -17,6 +18,6 @@ namespace CAFU.Data.Data.Repository
 
     public interface IAsyncReader : IDataStore
     {
-        Task<IEnumerable<byte>> ReadAsync(Uri uri);
+        UniTask<IEnumerable<byte>> ReadAsync(Uri uri);
     }
 }

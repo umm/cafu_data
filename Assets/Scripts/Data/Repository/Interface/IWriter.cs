@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CAFU.Core;
 using UniRx;
+using UniRx.Async;
 
 namespace CAFU.Data.Data.Repository
 {
@@ -18,6 +19,6 @@ namespace CAFU.Data.Data.Repository
 
     public interface IAsyncWriter : IDataStore
     {
-        Task WriteAsync(Uri uri, IEnumerable<byte> data);
+        UniTask WriteAsync(Uri uri, IEnumerable<byte> data);
     }
 }
