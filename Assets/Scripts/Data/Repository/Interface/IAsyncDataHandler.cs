@@ -6,7 +6,7 @@ namespace CAFU.Data.Data.Repository
         IAsyncUpdater,
         IAsyncDeleter,
         IAsyncWriter,
-        IChecker
+        IAsyncChecker
     {
     }
 }

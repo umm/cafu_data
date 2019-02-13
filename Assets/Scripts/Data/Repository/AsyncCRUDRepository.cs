@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CAFU.Data.Data.UseCase;
+using UniRx.Async;
 using Zenject;
 
 namespace CAFU.Data.Data.Repository
@@ -12,31 +13,31 @@ namespace CAFU.Data.Data.Repository
         [Inject] private IAsyncReader Reader { get; set; }
         [Inject] private IAsyncUpdater Updater { get; set; }
         [Inject] private IAsyncDeleter Deleter { get; set; }
-        [Inject] private IChecker Checker { get; set; }
+        [Inject] private IAsyncChecker Checker { get; set; }
 
-        public async Task CreateAsync(Uri uri, IEnumerable<byte> data)
+        public async UniTask CreateAsync(Uri uri, IEnumerable<byte> data)
         {
             await Creator.CreateAsync(uri, data);
         }
 
-        public async Task<IEnumerable<byte>> ReadAsync(Uri uri)
+        public async UniTask<IEnumerable<byte>> ReadAsync(Uri uri)
         {
             return await Reader.ReadAsync(uri);
         }
 
-        public async Task UpdateAsync(Uri uri, IEnumerable<byte> data)
+        public async UniTask UpdateAsync(Uri uri, IEnumerable<byte> data)
         {
             await Updater.UpdateAsync(uri, data);
         }
 
-        public async Task DeleteAsync(Uri uri)
+        public async UniTask DeleteAsync(Uri uri)
         {
             await Deleter.DeleteAsync(uri);
         }
 
-        public bool Exists(Uri uri)
+        public async UniTask<bool> ExistsAsync(Uri uri)
         {
-            return Checker.Exists(uri);
+            return await Checker.ExistsAsync(uri);
         }
     }
 }

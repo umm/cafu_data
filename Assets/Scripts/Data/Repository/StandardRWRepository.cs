@@ -10,7 +10,7 @@ namespace CAFU.Data.Data.Repository
         [Inject] private IStandardReader Reader { get; set; }
         [Inject] private IStandardWriter Writer { get; set; }
         [Inject] private IStandardDeleter Deleter { get; set; }
-        [Inject] private IChecker Checker { get; set; }
+        [Inject] private IStandardChecker Checker { get; set; }
 
         public IEnumerable<byte> Read(Uri uri)
         {

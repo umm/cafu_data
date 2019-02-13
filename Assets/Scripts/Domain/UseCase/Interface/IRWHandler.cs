@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using CAFU.Core;
 using UniRx;
+using UniRx.Async;
 
 namespace CAFU.Data.Data.UseCase
 {
@@ -19,14 +21,14 @@ namespace CAFU.Data.Data.UseCase
         IObservable<IEnumerable<byte>> ReadAsObservable(Uri uri);
         IObservable<Unit> WriteAsObservable(Uri uri, IEnumerable<byte> data);
         IObservable<Unit> DeleteAsObservable(Uri uri);
-        bool Exists(Uri uri);
+        IObservable<bool> ExistsAsObservable(Uri uri);
     }
 
     public interface IAsyncRWHandler : IRepository
     {
-        Task<IEnumerable<byte>> ReadAsync(Uri uri);
-        Task WriteAsync(Uri uri, IEnumerable<byte> data);
-        Task DeleteAsync(Uri uri);
-        bool Exists(Uri uri);
+        UniTask<IEnumerable<byte>> ReadAsync(Uri uri, CancellationToken cancellationToken = default);
+        UniTask WriteAsync(Uri uri, IEnumerable<byte> data, CancellationToken cancellationToken = default);
+        UniTask DeleteAsync(Uri uri, CancellationToken cancellationToken = default);
+        UniTask<bool> ExistsAsync(Uri uri, CancellationToken cancellationToken = default);
     }
 }

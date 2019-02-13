@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Threading;
 using CAFU.Data.Data.UseCase;
+using UniRx.Async;
 using Zenject;
 
 namespace CAFU.Data.Data.Repository
@@ -11,26 +12,26 @@ namespace CAFU.Data.Data.Repository
         [Inject] private IAsyncReader Reader { get; set; }
         [Inject] private IAsyncWriter Writer { get; set; }
         [Inject] private IAsyncDeleter Deleter { get; set; }
-        [Inject] private IChecker Checker { get; set; }
+        [Inject] private IAsyncChecker Checker { get; set; }
 
-        public async Task<IEnumerable<byte>> ReadAsync(Uri uri)
+        public async UniTask<IEnumerable<byte>> ReadAsync(Uri uri, CancellationToken cancellationToken = default)
         {
-            return await Reader.ReadAsync(uri);
+            return await Reader.ReadAsync(uri, cancellationToken);
         }
 
-        public async Task WriteAsync(Uri uri, IEnumerable<byte> data)
+        public async UniTask WriteAsync(Uri uri, IEnumerable<byte> data, CancellationToken cancellationToken = default)
         {
-            await Writer.WriteAsync(uri, data);
+            await Writer.WriteAsync(uri, data, cancellationToken);
         }
 
-        public async Task DeleteAsync(Uri uri)
+        public async UniTask DeleteAsync(Uri uri, CancellationToken cancellationToken = default)
         {
-            await Deleter.DeleteAsync(uri);
+            await Deleter.DeleteAsync(uri, cancellationToken);
         }
 
-        public bool Exists(Uri uri)
+        public async UniTask<bool> ExistsAsync(Uri uri, CancellationToken cancellationToken = default)
         {
-            return Checker.Exists(uri);
+            return await Checker.ExistsAsync(uri, cancellationToken);
         }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using System.Threading.Tasks;
+using System.Threading;
 using CAFU.Core;
 using UniRx;
 using UniRx.Async;
@@ -18,6 +18,6 @@ namespace CAFU.Data.Data.Repository
 
     public interface IAsyncDeleter : IDataStore
     {
-        UniTask DeleteAsync(Uri uri);
+        UniTask DeleteAsync(Uri uri, CancellationToken cancellationToken = default);
     }
 }

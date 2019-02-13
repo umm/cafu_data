@@ -11,7 +11,7 @@ namespace CAFU.Data.Data.Repository
         [Inject] private IStandardReader Reader { get; set; }
         [Inject] private IStandardUpdater Updater { get; set; }
         [Inject] private IStandardDeleter Deleter { get; set; }
-        [Inject] private IChecker Checker { get; set; }
+        [Inject] private IStandardChecker Checker { get; set; }
 
         public void Create(Uri uri, IEnumerable<byte> data)
         {
