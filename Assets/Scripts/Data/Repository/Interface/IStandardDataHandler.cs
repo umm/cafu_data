@@ -6,7 +6,7 @@ namespace CAFU.Data.Data.Repository
         IStandardUpdater,
         IStandardDeleter,
         IStandardWriter,
-        IChecker
+        IStandardChecker
     {
     }
 }

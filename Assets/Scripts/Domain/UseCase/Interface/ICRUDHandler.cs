@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using CAFU.Core;
 using JetBrains.Annotations;
 using UniRx;
+using UniRx.Async;
 
 namespace CAFU.Data.Data.UseCase
 {
@@ -24,16 +24,16 @@ namespace CAFU.Data.Data.UseCase
         IObservable<IEnumerable<byte>> ReadAsObservable(Uri uri);
         IObservable<Unit> UpdateAsObservable(Uri uri, IEnumerable<byte> data);
         IObservable<Unit> DeleteAsObservable(Uri uri);
-        bool Exists(Uri uri);
+        IObservable<bool> ExistsAsObservable(Uri uri);
     }
 
     [PublicAPI]
     public interface IAsyncCRUDHandler : IRepository
     {
-        Task CreateAsync(Uri uri, IEnumerable<byte> data);
-        Task<IEnumerable<byte>> ReadAsync(Uri uri);
-        Task UpdateAsync(Uri uri, IEnumerable<byte> data);
-        Task DeleteAsync(Uri uri);
-        bool Exists(Uri uri);
+        UniTask CreateAsync(Uri uri, IEnumerable<byte> data);
+        UniTask<IEnumerable<byte>> ReadAsync(Uri uri);
+        UniTask UpdateAsync(Uri uri, IEnumerable<byte> data);
+        UniTask DeleteAsync(Uri uri);
+        UniTask<bool> ExistsAsync(Uri uri);
     }
 }

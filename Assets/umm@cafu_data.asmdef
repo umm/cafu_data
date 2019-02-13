@@ -4,6 +4,7 @@
         "umm@cafu_core@v3",
         "umm@unirx",
         "umm@unirx-Async",
+        "umm@unirx_observableunitywebrequest",
         "Zenject"
     ],
     "optionalUnityReferences": [],

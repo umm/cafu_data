@@ -6,7 +6,7 @@ namespace CAFU.Data.Data.Repository
         IObservableUpdater,
         IObservableDeleter,
         IObservableWriter,
-        IChecker
+        IObservableChecker
     {
     }
 }

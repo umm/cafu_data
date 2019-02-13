@@ -32,5 +32,10 @@ namespace CAFU.Data.Data.DataStore
         {
             return WriteAsync(uri, data).ToObservable();
         }
+
+        public IObservable<bool> ExistsAsObservable(Uri uri)
+        {
+            return ExistsAsync(uri).ToObservable();
+        }
     }
 }

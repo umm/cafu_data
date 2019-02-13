@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Threading;
 using CAFU.Core;
 using UniRx;
 using UniRx.Async;
@@ -19,6 +19,6 @@ namespace CAFU.Data.Data.Repository
 
     public interface IAsyncUpdater : IDataStore
     {
-        UniTask UpdateAsync(Uri uri, IEnumerable<byte> data);
+        UniTask UpdateAsync(Uri uri, IEnumerable<byte> data, CancellationToken cancellationToken = default);
     }
 }
