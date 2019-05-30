@@ -26,7 +26,9 @@
   "dependencies": {
     "@umm/cafu_core": "umm/cafu_core#^3.0.0",
     "@umm/scripts": "umm/scripts#^1.0.0",
-    "@umm/unirx": "umm/unirx#^2.0.0"
+    "@umm/unirx": "umm/unirx#^2.0.0",
+    "@umm/unirx_observableunitywebrequest": "umm/unirx_observableunitywebrequest#^1.0.0",
+    "@umm/zenject": "umm/zenject#^2.0.0"
   },
   "devDependencies": {}
 }
