@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CAFU.Data.Data.Repository;
 using UniRx;
+using UniRx.Async;
 
 namespace CAFU.Data.Data.DataStore
 {
@@ -9,7 +10,7 @@ namespace CAFU.Data.Data.DataStore
     {
         public IObservable<Unit> CreateAsObservable(Uri uri, IEnumerable<byte> data)
         {
-            return CreateAsync(uri, data).ToObservable();
+            return CreateAsync(uri, data).ToObservable().AsUnitObservable();
         }
 
         public IObservable<IEnumerable<byte>> ReadAsObservable(Uri uri)
@@ -19,17 +20,17 @@ namespace CAFU.Data.Data.DataStore
 
         public IObservable<Unit> UpdateAsObservable(Uri uri, IEnumerable<byte> data)
         {
-            return UpdateAsync(uri, data).ToObservable();
+            return UpdateAsync(uri, data).ToObservable().AsUnitObservable();
         }
 
         public IObservable<Unit> DeleteAsObservable(Uri uri)
         {
-            return DeleteAsync(uri).ToObservable();
+            return DeleteAsync(uri).ToObservable().AsUnitObservable();
         }
 
         public IObservable<Unit> WriteAsObservable(Uri uri, IEnumerable<byte> data)
         {
-            return WriteAsync(uri, data).ToObservable();
+            return WriteAsync(uri, data).ToObservable().AsUnitObservable();
         }
 
         public IObservable<bool> ExistsAsObservable(Uri uri)
