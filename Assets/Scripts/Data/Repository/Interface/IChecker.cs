@@ -1,11 +1,10 @@
 using System;
 using System.Threading;
-using CAFU.Core;
 using UniRx.Async;
 
 namespace CAFU.Data.Data.Repository
 {
-    public interface IChecker : IDataStore
+    public interface IChecker
     {
     }
     public interface IStandardChecker : IChecker

@@ -1,23 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using CAFU.Core;
 using UniRx;
 using UniRx.Async;
 
 namespace CAFU.Data.Data.Repository
 {
-    public interface IStandardCreator : IDataStore
+    public interface IStandardCreator
     {
         void Create(Uri uri, IEnumerable<byte> data);
     }
 
-    public interface IObservableCreator : IDataStore
+    public interface IObservableCreator
     {
         IObservable<Unit> CreateAsObservable(Uri uri, IEnumerable<byte> data);
     }
 
-    public interface IAsyncCreator : IDataStore
+    public interface IAsyncCreator
     {
         UniTask CreateAsync(Uri uri, IEnumerable<byte> data, CancellationToken cancellationToken = default);
     }
