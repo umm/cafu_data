@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using CAFU.Core;
 using JetBrains.Annotations;
 using UniRx;
 using UniRx.Async;
@@ -8,7 +7,7 @@ using UniRx.Async;
 namespace CAFU.Data.Data.UseCase
 {
     [PublicAPI]
-    public interface IStandardCRUDHandler : IRepository
+    public interface IStandardCRUDHandler
     {
         void Create(Uri uri, IEnumerable<byte> data);
         IEnumerable<byte> Read(Uri uri);
@@ -18,7 +17,7 @@ namespace CAFU.Data.Data.UseCase
     }
 
     [PublicAPI]
-    public interface IObservableCRUDHandler : IRepository
+    public interface IObservableCRUDHandler
     {
         IObservable<Unit> CreateAsObservable(Uri uri, IEnumerable<byte> data);
         IObservable<IEnumerable<byte>> ReadAsObservable(Uri uri);
@@ -28,7 +27,7 @@ namespace CAFU.Data.Data.UseCase
     }
 
     [PublicAPI]
-    public interface IAsyncCRUDHandler : IRepository
+    public interface IAsyncCRUDHandler
     {
         UniTask CreateAsync(Uri uri, IEnumerable<byte> data);
         UniTask<IEnumerable<byte>> ReadAsync(Uri uri);
